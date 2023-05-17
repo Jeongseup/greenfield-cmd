@@ -203,7 +203,7 @@ func createBucket(ctx *cli.Context) error {
 		opts.ChargedQuota = chargedQuota
 	}
 
-	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_BLOCK
+	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_SYNC
 	opts.TxOpts = &types.TxOption{Mode: &broadcastMode}
 
 	txnHash, err := client.CreateBucket(c, bucketName, primarySpAddrStr, opts)
@@ -256,7 +256,7 @@ func updateBucket(ctx *cli.Context) error {
 		opts.ChargedQuota = &chargedQuota
 	}
 
-	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_BLOCK
+	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_SYNC
 	txnOpt := types.TxOption{Mode: &broadcastMode}
 	opts.TxOpts = &txnOpt
 
@@ -349,7 +349,7 @@ func putBucketPolicy(ctx *cli.Context) error {
 		statement = utils.NewStatement(actions, effect, nil, sdktypes.NewStatementOptions{})
 	}
 
-	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_BLOCK
+	broadcastMode := tx.BroadcastMode_BROADCAST_MODE_SYNC
 	txOpts := &types.TxOption{Mode: &broadcastMode}
 
 	c, cancelPutPolicy := context.WithCancel(globalContext)
